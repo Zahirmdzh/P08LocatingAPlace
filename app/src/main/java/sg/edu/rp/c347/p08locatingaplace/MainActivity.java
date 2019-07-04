@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn1, btn2, btn3;
     private GoogleMap map;
     Spinner spn;
-    ArrayList<String> aLArea;
-    ArrayAdapter<String> aaArea;
+
 
 
     @Override
@@ -43,14 +42,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         spn = findViewById(R.id.spinnerArea);
-        aLArea = new ArrayList<>();
-        // create an array adapter using default spinner layout
-        aaArea = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,aLArea);
-        // bind array to adapter
-
-        spn.setAdapter(aaArea);
-        String[] strArea = getResources().getStringArray(R.array.spinnerItems);
-        aLArea.addAll(Arrays.asList(strArea));
 
         FragmentManager fm = getSupportFragmentManager();
         SupportMapFragment mapFragment = (SupportMapFragment)
@@ -92,9 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
 
-
-
-
                 UiSettings ui = map.getUiSettings();
 
                 ui.setCompassEnabled(true);
@@ -133,39 +121,35 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                        aLArea.clear();
-
-                        if(position == 0) {
-                            if (map != null) {
+                        if (map != null) {
+                            if (position == 0) {
 
 
                                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                                 LatLng poi_north = new LatLng(1.4650972, 103.802653);
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_north,
                                         18));
-                            }
 
 
-                        } else if (position ==1) {
-                            if (map != null) {
+                            } else if (position == 1) {
+
                                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                                 LatLng poi_central = new LatLng(1.3073877, 103.7956812);
-                                map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_central,
-                                        18));
-                            }
+                                map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_central, 18));
 
-                        } else if (position == 2) {
-                            if (map != null) {
+
+                            } else if (position == 2) {
+
                                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                                 LatLng poi_east = new LatLng(1.3533249, 103.9514914);
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_east,
                                         18));
+
+
                             }
 
                         }
 
-
-                        aaArea.notifyDataSetChanged();
                     }
 
                     @Override
